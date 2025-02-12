@@ -6,8 +6,13 @@
 
 	let { data }: PageProps = $props();
 	let bg: Bg | undefined = $state();
+	let images: HTMLImageElement[] = [];
 
 	onMount(() => {
+		for (const v of [bg?.lightTab, bg?.darkTab, bg?.lightPhone, bg?.darkPhone]) {
+			images.push(new Image());
+			images[images.length - 1].src = v ? v : '';
+		}
 		navBar.set(backgrounds[data.univ as univs].koreanName);
 		bg = backgrounds[data.univ as univs];
 		if (!bg) {
